@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Notes Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome untuk icon (opsional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>
+                <i class="fas fa-pencil-alt"></i> 
+                Aplikasi Notes
+            </h1>
+            
+        </header>
+
+        <!-- Form Tambah/Edit Catatan -->
+        <div class="form-card">
+            <h2 id="formTitle">
+                <i class="fas fa-plus-circle"></i> 
+                Tambah Catatan Baru
+            </h2>
+            <form id="noteForm">
+                <input type="hidden" id="noteId">
+                
+                <div class="form-group">
+                    <label for="judul">
+                        <i class="fas fa-heading"></i> 
+                        Judul Catatan
+                    </label>
+                    <input type="text" id="judul" placeholder="Masukkan judul catatan..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="isi">
+                        <i class="fas fa-align-left"></i> 
+                        Isi Catatan
+                    </label>
+                    <textarea id="isi" rows="6" placeholder="Tulis catatan Anda di sini..." required></textarea>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" id="submitBtn">
+                        <i class="fas fa-save"></i> 
+                        Simpan Catatan
+                    </button>
+                    <button type="button" id="cancelBtn" style="display: none;">
+                        <i class="fas fa-times"></i> 
+                        Batal
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Daftar Catatan -->
+        <div class="notes-section">
+            <h2>
+                <i class="fas fa-list"></i> 
+                Daftar Catatan
+                <span id="noteCount" class="badge">0</span>
+            </h2>
+            <div id="notesList">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> 
+                    Memuat catatan...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
