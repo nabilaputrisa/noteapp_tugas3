@@ -1,9 +1,7 @@
 steps:
-  - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/tcc-fe-rest", "."]
-
-  - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/tcc-fe-rest"]
+  steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy", "--quiet"]
 
   - name: "gcr.io/cloud-builders/gcloud"
     args:
