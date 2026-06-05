@@ -1,13 +1,10 @@
 steps:
-  # Step 1: Build Docker image
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/$PROJECT_ID/tcc-fe-rest", "."]
 
-  # Step 2: Push image ke Container Registry
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/tcc-fe-rest"]
 
-  # Step 3: Deploy ke Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
@@ -16,11 +13,11 @@ steps:
         "fe-rest",
         "--image",
         "gcr.io/$PROJECT_ID/tcc-fe-rest",
-        "--timeout",
-        "8080",
         "--region",
         "asia-southeast1",
         "--allow-unauthenticated",
         "--port",
-        "8080",
+        "8080"
       ]
+
+timeout: "1600s"
