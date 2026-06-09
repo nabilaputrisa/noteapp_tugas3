@@ -1,21 +1,5 @@
 steps:
-  steps:
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "--quiet"]
-
-  - name: "gcr.io/cloud-builders/gcloud"
-    args:
-      [
-        "run",
-        "deploy",
-        "fe-rest",
-        "--image",
-        "gcr.io/$PROJECT_ID/tcc-fe-rest",
-        "--region",
-        "asia-southeast1",
-        "--allow-unauthenticated",
-        "--port",
-        "8080"
-      ]
 
 timeout: "1600s"
