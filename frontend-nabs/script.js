@@ -1,4 +1,4 @@
-const API_URL = 'https://backnote-salsa-255520032221.asia-southeast1.run.app/api/notes';
+const API_URL = 'https://backnote-salsa-255520032221.asia-southeast1.run.app/';
 
 let currentEditId = null;
 
@@ -10,6 +10,7 @@ const cancelBtn = document.getElementById('cancelBtn');
 const notesList = document.getElementById('notesList');
 const formTitle = document.getElementById('formTitle');
 const noteCount = document.getElementById('noteCount');
+
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchNotes();
@@ -36,7 +37,7 @@ async function fetchNotes() {
         notesList.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-database"></i>
-                <p>Gagal Terhubung ke Server</p>
+                <p> Gagal Terhubung ke Server</p>
             </div>
         `;
     }
@@ -47,19 +48,19 @@ function displayNotes(notes) {
         notesList.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-notes-medical"></i>
-                <p>Belum ada Catatan</p>
+                <p> Belum ada Catatan</p>
             </div>
         `;
         return;
     }
 
     notesList.innerHTML = notes.map(note => `
-        <div class="note-card" data-id="${note.id}">
+            <div class="note-card" data-id="${note.id}">
             <h3>${escapeHtml(note.judul)}</h3>
             <p>${escapeHtml(note.isi)}</p>
             <small>
                 <i class="far fa-calendar-alt"></i> 
-                ${formatDate(note.created_at)}
+                ${formatDate(note.tanggal_dibuat)}
             </small>
             <div class="card-actions">
                 <button class="edit-btn" onclick="editNote(${note.id})">
@@ -80,7 +81,7 @@ async function addNote(judul, isi) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ judul, isi })
+            body: JSON.stringify({ judul, isi})
         });
 
         if (!response.ok) {
@@ -107,7 +108,9 @@ async function updateNote(id, judul, isi) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ judul, isi })
+            body: JSON.stringify({ 
+                judul: judul, 
+                isi: isi })
         });
 
         if (!response.ok) {
@@ -144,6 +147,7 @@ async function deleteNote(id) {
         }
     }
 }
+
 
 async function editNote(id) {
     console.log('edit ID:', id);
@@ -186,6 +190,7 @@ function resetForm() {
     formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Tambah Catatan Baru';
 }
 
+// Handle form submit
 function handleSubmit(e) {
     e.preventDefault();
     
@@ -194,6 +199,7 @@ function handleSubmit(e) {
 
     console.log('📋 Submit - currentEditId:', currentEditId);
     
+    // Validasi
     if (!judul) {
         showWarning('⚠️ Judul catatan harus diisi!');
         judulInput.focus();
@@ -213,12 +219,16 @@ function handleSubmit(e) {
     }
 }
 
+// ==================== FUNGSI PEMBANTU ====================
+
+// Update jumlah catatan
 function updateNoteCount(count) {
     if (noteCount) {
         noteCount.textContent = count;
     }
 }
 
+// Tampilkan loading
 function showLoading() {
     notesList.innerHTML = `
         <div class="loading">
@@ -228,12 +238,14 @@ function showLoading() {
     `;
 }
 
+// Escape HTML untuk keamanan (mencegah XSS)
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
+// Format tanggal ke format Indonesia
 function formatDate(dateString) {
     if (!dateString) return 'Tanggal tidak tersedia';
     
@@ -249,27 +261,36 @@ function formatDate(dateString) {
     return date.toLocaleDateString('id-ID', options);
 }
 
+// ==================== NOTIFICATIONS ====================
+
+// Tampilkan notifikasi sukses
 function showSuccess(message) {
     showNotification(message, 'success');
 }
 
+// Tampilkan notifikasi error
 function showError(message) {
     showNotification(message, 'error');
 }
 
+// Tampilkan notifikasi warning
 function showWarning(message) {
     showNotification(message, 'warning');
 }
 
+// Fungsi notifikasi utama
 function showNotification(message, type = 'success') {
+    // Hapus notifikasi yang sudah ada
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
     
+    // Buat elemen notifikasi
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     
+    // Icon berdasarkan tipe
     let icon = '';
     switch(type) {
         case 'success':
@@ -286,11 +307,14 @@ function showNotification(message, type = 'success') {
     notification.innerHTML = `${icon} ${message}`;
     document.body.appendChild(notification);
     
+    // Auto remove setelah 3 detik
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
+// ==================== EXPORT FUNCTIONS GLOBAL ====================
+// Agar fungsi bisa dipanggil dari HTML (onclick)
 window.editNote = editNote;
 window.deleteNote = deleteNote;

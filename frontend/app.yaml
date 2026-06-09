@@ -1,33 +1,25 @@
 runtime: nodejs22
-service: notes-salsa
+service: notes-frontend
 
-automatic_scalling:
+# Skala otomatis (gratis)
+automatic_scaling:
   target_cpu_utilization: 0.65
-  min_instance: 0
-  max_instance: 1
+  min_instances: 0
+  max_instances: 1
 
+# Handler untuk file statis
 handlers:
+  # File JavaScript
   - url: /script.js
     static_files: script.js
     upload: script.js
 
+  # File CSS
   - url: /style.css
     static_files: style.css
     upload: style.css
 
+  # Semua request lain ke index.html
   - url: /.*
     static_files: index.html
     upload: index.html
-
-steps:
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: "bash"
-    args:
-      - "-c"
-      - gcloud config set app/cloud_build_timeout 1600
-        gcloud app deploy fe_service/app.yaml
-timeout: "1600s"
-
-options:
-  logging: CLOUD_LOGGING_ONLY
-
