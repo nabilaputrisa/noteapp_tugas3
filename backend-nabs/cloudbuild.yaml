@@ -23,6 +23,6 @@ steps:
         "us-central1",
         "--allow-unauthenticated",
       ]
-Google Cloud Storage (butuh hak akses).
+
 options:
   logging: CLOUD_LOGGING_ONLY
