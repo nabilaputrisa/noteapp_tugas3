@@ -6,7 +6,7 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY backend-nabs/ .
+COPY . .
 
 EXPOSE 5000
 
