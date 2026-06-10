@@ -27,11 +27,11 @@ app.get('/', (req, res) => {
         message: 'Notes API berjalan',
         status: 'success',
         endpoints: {
-            getAll: 'GET /api/notes',
-            getById: 'GET /api/notes/:id',
-            create: 'POST /api/notes',
-            update: 'PUT /api/notes/:id',
-            delete: 'DELETE /api/notes/:id'
+            getAll: 'GET /api/notes_app',
+            getById: 'GET /api/notes_app/:id',
+            create: 'POST /api/notes_app',
+            update: 'PUT /api/notes_app/:id',
+            delete: 'DELETE /api/notes_app/:id'
         }
     });
 });

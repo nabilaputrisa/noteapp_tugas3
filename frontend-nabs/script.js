@@ -1,4 +1,4 @@
-const API_URL = 'https://be-rest-saa-255520032221.asia-southeast1.run.app/';
+const API_URL = 'https://be-rest-saa-255520032221.asia-southeast1.run.app/api/notes';
 
 let currentEditId = null;
 
