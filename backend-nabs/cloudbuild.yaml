@@ -22,6 +22,8 @@ steps:
         "--region",
         "us-central1",
         "--allow-unauthenticated",
+        "--set-env-vars",
+        "DB_HOST=34.172.113.167,DB_USER=admin,DB_PASSWORD=mypassword,DB_NAME=notes_123230002,PORT=5000",
       ]
 
 options:

@@ -1,9 +1,8 @@
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
-//const path = require('path');
 
-// Load .env dari folder backend
-dotenv.config({ path: path.join(__dirname, '../.env') });
+// Load environment variables
+dotenv.config();
 
 // Debug: cek apakah env terbaca (hapus setelah deploy)
 console.log('📋 Database Configuration:');
