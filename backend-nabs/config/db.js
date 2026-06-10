@@ -10,7 +10,7 @@ console.log('📋 Database Configuration:');
 console.log('   Host:', process.env.DB_HOST || 'Not set');
 console.log('   User:', process.env.DB_USER || 'Not set');
 console.log('   Database:', process.env.DB_NAME || 'Not set');
-console.log('   Port:', process.env.PORT || '8080');
+console.log('   Port:', process.env.PORT || '5000');
 
 // Buat connection pool
 const pool = mysql.createPool({
