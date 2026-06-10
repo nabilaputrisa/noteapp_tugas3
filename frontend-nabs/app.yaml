@@ -1,33 +1,20 @@
 runtime: nodejs22
 service: fe-rest
 
-automatic_scalling:
+automatic_scaling:
   target_cpu_utilization: 0.65
-  min_instance: 0
-  max_instance: 1
+  min_instances: 0
+  max_instances: 1
 
 handlers:
   - url: /script.js
     static_files: script.js
-    upload: script.js
+    upload: script\.js
 
   - url: /style.css
     static_files: style.css
-    upload: style.css
+    upload: style\.css
 
   - url: /.*
     static_files: index.html
-    upload: index.html
-
-steps:
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: "bash"
-    args:
-      - "-c"
-      - gcloud config set app/cloud_build_timeout 1600
-        gcloud app deploy fe_service/app.yaml
-timeout: "1600s"
-
-options:
-  logging: CLOUD_LOGGING_ONLY
-
+    upload: index\.html
