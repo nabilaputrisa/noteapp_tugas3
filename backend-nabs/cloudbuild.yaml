@@ -1,8 +1,9 @@
 steps:
   - name: 'ubuntu'
     args: ['ls', '-R']
+
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/tcc-be-rest", "-f", "backend-nabs/Dockerfile","."]
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/tcc-be-rest", "-f", "backend-nabs/Dockerfile", "."]
 
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/tcc-be-rest"]
@@ -22,8 +23,6 @@ steps:
         "--region",
         "us-central1",
         "--allow-unauthenticated",
-        "--set-env-vars",
-        "DB_HOST=34.172.113.167,DB_USER=admin,DB_PASSWORD=mypassword,DB_NAME=notes_123230002,PORT=5000",
       ]
 
 options:
