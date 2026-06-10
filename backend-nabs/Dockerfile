@@ -8,6 +8,6 @@ RUN npm install
 
 COPY backend-nabs/ .
 
-EXPOSE 8080
+EXPOSE 5000
 
 CMD ["node", "server.js"]
