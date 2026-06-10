@@ -1,5 +1,5 @@
 runtime: nodejs22
-service: notes-salsa
+service: fe-rest
 
 automatic_scalling:
   target_cpu_utilization: 0.65
